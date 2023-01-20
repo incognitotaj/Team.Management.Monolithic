@@ -24,20 +24,20 @@ namespace Team.Application.Mappings
             CreateMap<Resource, UpdateResourceRequest>().ReverseMap();
 
             CreateMap<ProjectClient, ProjectClientDto>().ReverseMap();
-            //CreateMap<ProjectClient, CreateProjectClientCommand>().ReverseMap();
-            //CreateMap<ProjectClient, UpdateProjectClientCommand>().ReverseMap();
+            CreateMap<ProjectClient, CreateProjectClientRequest>().ReverseMap();
+            CreateMap<ProjectClient, UpdateProjectClientRequest>().ReverseMap();
 
             CreateMap<ProjectServer, ProjectServerDto>().ReverseMap();
-            //CreateMap<ProjectServer, CreateProjectServerCommand>().ReverseMap();
-            //CreateMap<ProjectServer, UpdateProjectServerCommand>().ReverseMap();
+            CreateMap<ProjectServer, CreateProjectServerRequest>().ReverseMap();
+            CreateMap<ProjectServer, UpdateProjectServerRequest>().ReverseMap();
 
             CreateMap<ProjectResource, ProjectResourceDto>().ReverseMap();
-            //CreateMap<ProjectResource, CreateProjectResourceCommand>().ReverseMap();
-            //CreateMap<ProjectResource, UpdateProjectResourceCommand>().ReverseMap();
+            CreateMap<ProjectResource, CreateProjectResourceRequest>().ReverseMap();
+            CreateMap<ProjectResource, UpdateProjectResourceRequest>().ReverseMap();
 
             CreateMap<ProjectResourceDailyTask, ProjectResourceDailyTaskDto>().ReverseMap();
-            //CreateMap<ProjectResourceDailyTask, CreateProjectResourceDailyTaskCommand>().ReverseMap();
-            //CreateMap<ProjectResourceDailyTask, UpdateProjectResourceDailyTaskCommand>().ReverseMap();
+            CreateMap<ProjectResourceDailyTask, CreateProjectResourceDailyTaskRequest>().ReverseMap();
+            CreateMap<ProjectResourceDailyTask, UpdateProjectResourceDailyTaskRequest>().ReverseMap();
 
             CreateMap<ProjectMilestone, ProjectMilestoneDto>().ReverseMap();
             //CreateMap<ProjectMilestone, CreateProjectMilestoneCommand>().ReverseMap();
