@@ -57,7 +57,7 @@ namespace Team.API.Controllers
         [HttpGet()]
         [ProducesResponseType(typeof(IEnumerable<ProjectServerDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<ProjectServerDto>>> GetByUser(Guid projectId)
+        public async Task<ActionResult<IEnumerable<ProjectServerDto>>> GetByProject(Guid projectId)
         {
             var entityProject = await _projectRepository.GetByIdAsync(projectId);
             if (entityProject == null)

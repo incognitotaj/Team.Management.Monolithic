@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.Application.Contracts.Persistence;
@@ -51,6 +52,20 @@ namespace Team.API.Controllers
             }
 
             return Ok(_mapper.Map<ProjectDto>(project));
+        }
+
+        /// <summary>
+        /// Get list of all projects for the specific user as manager
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet("get-by-user/{userId}")]
+        [ProducesResponseType(typeof(IEnumerable<ProjectDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetByUser(Guid userId)
+        {
+            var resultList = await _projectRepository.GetProjectsByUserAsync(userId);
+            return Ok(_mapper.Map<List<ProjectDto>>(resultList));
         }
 
         /// <summary>

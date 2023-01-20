@@ -46,8 +46,8 @@ namespace Team.Application.Mappings
             CreateMap<ProjectDocument, ProjectDocumentDto>()
                 .ForMember(dest => dest.FilePath, opt => opt.MapFrom<ProjectDocumentUrlResolver>())
                 .ReverseMap();
-            //CreateMap<ProjectDocument, CreateProjectDocumentCommand>().ReverseMap();
-            //CreateMap<ProjectDocument, UpdateProjectDocumentCommand>().ReverseMap();
+            CreateMap<ProjectDocument, CreateProjectDocumentRequest>().ReverseMap();
+            CreateMap<ProjectDocument, UpdateProjectDocumentRequest>().ReverseMap();
         }
     }
 }
