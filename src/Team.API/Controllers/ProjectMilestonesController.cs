@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -14,6 +15,7 @@ namespace Team.API.Controllers
 {
     [Route("api/projects/{projectId}/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProjectMilestonesController : ControllerBase
     {
         private readonly IMapper _mapper;

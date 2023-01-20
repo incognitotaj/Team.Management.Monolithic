@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.Application.Contracts.Persistence;
@@ -14,6 +15,7 @@ namespace Team.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ResourcesController : Controller
     {
         private readonly IMapper _mapper;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.Application.Contracts.Persistence;
@@ -11,6 +12,7 @@ namespace Team.API.Controllers
 {
     [Route("api/projectResources/{projectResourceId}/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProjectResourceDailyTasksController : ControllerBase
     {
         private readonly IMapper _mapper;

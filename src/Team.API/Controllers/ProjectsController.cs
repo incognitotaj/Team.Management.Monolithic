@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.Application.Contracts.Persistence;
@@ -12,6 +12,7 @@ namespace Team.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProjectsController : ControllerBase
     {
         private readonly IMapper _mapper;
