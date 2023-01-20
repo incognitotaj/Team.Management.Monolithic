@@ -17,11 +17,11 @@ namespace Team.Application.Mappings
                 .ReverseMap();
 
             CreateMap<Project, CreateProjectRequest>().ReverseMap();
-            //CreateMap<Project, UpdateProjectCommand>().ReverseMap();
+            CreateMap<Project, UpdateProjectRequest>().ReverseMap();
 
             CreateMap<Resource, ResourceDto>().ReverseMap();
-            //CreateMap<Resource, CreateResourceCommand>().ReverseMap();
-            //CreateMap<Resource, UpdateResourceCommand>().ReverseMap();
+            CreateMap<Resource, CreateResourceRequest>().ReverseMap();
+            CreateMap<Resource, UpdateResourceRequest>().ReverseMap();
 
             CreateMap<ProjectClient, ProjectClientDto>().ReverseMap();
             //CreateMap<ProjectClient, CreateProjectClientCommand>().ReverseMap();
