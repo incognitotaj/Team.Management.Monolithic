@@ -2,6 +2,7 @@
 using Team.Application.Dtos;
 using Team.Application.Helpers;
 using Team.Domain.Entities;
+using Team.Domain.Requests;
 
 namespace Team.Application.Mappings
 {
@@ -15,7 +16,7 @@ namespace Team.Application.Mappings
                 .ForMember(dest => dest.ManagerUsername, opt => opt.MapFrom(p => p.Manager.UserName))
                 .ReverseMap();
 
-            //CreateMap<Project, CreateProjectCommand>().ReverseMap();
+            CreateMap<Project, CreateProjectRequest>().ReverseMap();
             //CreateMap<Project, UpdateProjectCommand>().ReverseMap();
 
             CreateMap<Resource, ResourceDto>().ReverseMap();

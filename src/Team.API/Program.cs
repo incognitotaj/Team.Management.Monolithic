@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "Team Management API",
-        Description = "An ASP.NET Core Web API for managing teams",
+        Description = ".NET Core Web API for managing teams. The repository contains the implementation using Clean Code Architecture guidelines with out CQRS.",
         TermsOfService = new Uri("https://www.datumsquare.com/"),
         Contact = new OpenApiContact
         {
