@@ -40,8 +40,8 @@ namespace Team.Application.Mappings
             CreateMap<ProjectResourceDailyTask, UpdateProjectResourceDailyTaskRequest>().ReverseMap();
 
             CreateMap<ProjectMilestone, ProjectMilestoneDto>().ReverseMap();
-            //CreateMap<ProjectMilestone, CreateProjectMilestoneCommand>().ReverseMap();
-            //CreateMap<ProjectMilestone, UpdateProjectMilestoneCommand>().ReverseMap();
+            CreateMap<ProjectMilestone, CreateProjectMilestoneRequest>().ReverseMap();
+            CreateMap<ProjectMilestone, UpdateProjectMilestoneRequest>().ReverseMap();
 
             CreateMap<ProjectDocument, ProjectDocumentDto>()
                 .ForMember(dest => dest.FilePath, opt => opt.MapFrom<ProjectDocumentUrlResolver>())

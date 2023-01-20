@@ -9,7 +9,7 @@ using Team.Domain.Requests;
 
 namespace Team.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/projects/{projectId}/[controller]")]
     [ApiController]
     public class ProjectClientsController : ControllerBase
     {
