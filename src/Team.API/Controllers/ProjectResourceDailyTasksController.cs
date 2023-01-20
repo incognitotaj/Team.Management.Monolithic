@@ -9,7 +9,7 @@ using Team.Domain.Requests;
 
 namespace Team.API.Controllers
 {
-    [Route("api/projects/{projectResourceId}/[controller]")]
+    [Route("api/projectResources/{projectResourceId}/[controller]")]
     [ApiController]
     public class ProjectResourceDailyTasksController : ControllerBase
     {
@@ -86,6 +86,7 @@ namespace Team.API.Controllers
             }
 
             var entity = _mapper.Map<ProjectResourceDailyTask>(request);
+            entity.ProjectResourceId = projectResourceId;
 
             var newEntity = await _projectResourceDailyTaskRepository.AddAsync(entity);
 
@@ -101,12 +102,12 @@ namespace Team.API.Controllers
         [HttpPut()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> Update(string projectResourceId, [FromBody] UpdateProjectResourceDailyTaskRequest request)
+        public async Task<ActionResult> Update(Guid projectResourceId, [FromBody] UpdateProjectResourceDailyTaskRequest request)
         {
-            var entityProjectResource = await _projectResourceRepository.GetByIdAsync(request.ProjectResourceId);
+            var entityProjectResource = await _projectResourceRepository.GetByIdAsync(projectResourceId);
             if (entityProjectResource == null)
             {
-                throw new NotFoundException(nameof(ProjectResource), request.ProjectResourceId);
+                throw new NotFoundException(nameof(ProjectResource), projectResourceId);
             }
 
             var entityToUpdate = await _projectResourceDailyTaskRepository.GetByIdAsync(request.ProjectResourceDailyTaskId);
@@ -116,6 +117,7 @@ namespace Team.API.Controllers
             }
 
             _mapper.Map(request, entityToUpdate, typeof(UpdateProjectResourceDailyTaskRequest), typeof(ProjectResourceDailyTask));
+            entityToUpdate.ProjectResourceId = projectResourceId;
 
             await _projectResourceDailyTaskRepository.UpdateAsync(entityToUpdate);
             return NoContent();

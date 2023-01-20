@@ -17,11 +17,13 @@ namespace Team.API.Controllers
         private readonly IProjectRepository _projectRepository;
         private readonly IProjectClientRepository _projectClientRepository;
 
-        public ProjectClientsController(IMapper mapper, IProjectClientRepository projectClientRepository)
+        public ProjectClientsController(IMapper mapper, IProjectRepository projectRepository, IProjectClientRepository projectClientRepository)
         {
             _mapper = mapper;
+            _projectRepository = projectRepository;
             _projectClientRepository = projectClientRepository;
         }
+
 
         /// <summary>
         /// Get specific project client by ID
@@ -76,15 +78,16 @@ namespace Team.API.Controllers
         /// <returns></returns>
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<ActionResult<Guid>> Create(string projectId, [FromBody] CreateProjectClientRequest request)
+        public async Task<ActionResult<Guid>> Create(Guid projectId, [FromBody] CreateProjectClientRequest request)
         {
-            var entityProject = await _projectRepository.GetByIdAsync(request.ProjectId);
+            var entityProject = await _projectRepository.GetByIdAsync(projectId);
             if (entityProject == null)
             {
-                throw new NotFoundException(nameof(Project), request.ProjectId);
+                throw new NotFoundException(nameof(Project), projectId);
             }
 
             var entity = _mapper.Map<ProjectClient>(request);
+            entity.ProjectId = projectId;
 
             var newEntity = await _projectClientRepository.AddAsync(entity);
 
@@ -100,12 +103,12 @@ namespace Team.API.Controllers
         [HttpPut()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> Update(string projectId, [FromBody] UpdateProjectClientRequest request)
+        public async Task<ActionResult> Update(Guid projectId, [FromBody] UpdateProjectClientRequest request)
         {
-            var entityProject = await _projectRepository.GetByIdAsync(request.ProjectId);
+            var entityProject = await _projectRepository.GetByIdAsync(projectId);
             if (entityProject == null)
             {
-                throw new NotFoundException(nameof(Project), request.ProjectId);
+                throw new NotFoundException(nameof(Project), projectId);
             }
 
             var entityToUpdate = await _projectClientRepository.GetByIdAsync(request.ProjectClientId);
@@ -115,6 +118,7 @@ namespace Team.API.Controllers
             }
 
             _mapper.Map(request, entityToUpdate, typeof(UpdateProjectClientRequest), typeof(ProjectClient));
+            entityToUpdate.ProjectId = projectId;
 
             await _projectClientRepository.UpdateAsync(entityToUpdate);
 

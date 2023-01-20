@@ -78,15 +78,16 @@ namespace Team.API.Controllers
         /// <returns></returns>
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<ActionResult<Guid>> Create(string projectId, [FromBody] CreateProjectResourceRequest request)
+        public async Task<ActionResult<Guid>> Create(Guid projectId, [FromBody] CreateProjectResourceRequest request)
         {
-            var entityProject = await _projectRepository.GetByIdAsync(request.ProjectId);
+            var entityProject = await _projectRepository.GetByIdAsync(projectId);
             if (entityProject == null)
             {
-                throw new NotFoundException(nameof(Project), request.ProjectId);
+                throw new NotFoundException(nameof(Project), projectId);
             }
 
             var entity = _mapper.Map<ProjectResource>(request);
+            entity.ProjectId = projectId;
 
             var newEntity = await _projectResourceRepository.AddAsync(entity);
 
@@ -102,12 +103,12 @@ namespace Team.API.Controllers
         [HttpPut()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> Update(string projectId, [FromBody] UpdateProjectResourceRequest request)
+        public async Task<ActionResult> Update(Guid projectId, [FromBody] UpdateProjectResourceRequest request)
         {
-            var entityProject = await _projectRepository.GetByIdAsync(request.ProjectId);
+            var entityProject = await _projectRepository.GetByIdAsync(projectId);
             if (entityProject == null)
             {
-                throw new NotFoundException(nameof(Project), request.ProjectId);
+                throw new NotFoundException(nameof(Project), projectId);
             }
 
             var entityToUpdate = await _projectResourceRepository.GetByIdAsync(request.ProjectResourceId);
@@ -117,6 +118,7 @@ namespace Team.API.Controllers
             }
 
             _mapper.Map(request, entityToUpdate, typeof(UpdateProjectResourceRequest), typeof(ProjectResource));
+            entityToUpdate.ProjectId = projectId;
 
             await _projectResourceRepository.UpdateAsync(entityToUpdate);
 
